@@ -1,17 +1,63 @@
-import { StatusBar, Text, View } from 'react-native'
-import React from 'react'
-import { Link } from 'expo-router'
-
-const RootLayout = () => {
+import { ScrollView, Text, View, Image } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Redirect, router } from 'expo-router';
+import { images } from '../constants';
+import CustomButton from './components/CustomButton';
+const App = () => {
     return (
-        <View className="flex-1 items-center justify-center bg-red-200">
-            <Text className="text-3xl">index</Text>
-            <StatusBar style="auto" />
-            <Link href="/profile" style={{ color: 'blue' }} >Go to Profile</Link>
-        </View>
+        <SafeAreaView className="bg-slate-950 h-full">
+
+            <ScrollView
+                contentContainerStyle={{
+                    height: '100dvh',
+                }}
+            >
+                <View className="w-full flex justify-start mt-7 items-center min-h-[85vh] px-4">
+                    <View className="flex  flex-column items-center mt-2 justify-center">
+                        <Image
+                            source={images.logo}
+                            style={{ height: 150, width: 150 }}
+                            className=""
+
+                            resizeMode="contain"
+                        />
+                        <Text className="text-primary text-7xl mt-1 ">Trend<Text className="text-secondary-100 text-7xl mt-2 ">Zy</Text></Text>
+                    </View>
+
+                    <Image
+                        source={images.thumbnail}
+                        className="max-w--[580px] w-full h-[300px]"
+                        resizeMode="contain"
+                    />
+                    <Text className="text-white text-start text-lg mt-1 ">
+                        <Text className="text-primary text-2xl ">Trend<Text className="text-secondary-100 text-2xl py-3 ">Zy</Text></Text> {" "}Descover Endless Possibilities.{"\n"}
+
+                        <Text className="text-gray-500 dark:text-gray-400" >
+                            At  <Text className="text-primary ">Trend</Text>
+                            <Text className="text-secondary-100 " >Zy</Text> creativity fuels innovation.
+                            It's where imagination meets action,
+                            pushing boundaries and reshaping the future</Text>
+
+
+                    </Text>
+
+
+
+                    <CustomButton title="Continue wtih Email"
+                        handlePress={() => router.push("/sign-in")}
+                        containerStyle="w-full mt-6" />
+
+                </View>
+            </ScrollView>
+            <StatusBar backgroundColor='#CB7B63'
+                style='dark'
+            />
+        </SafeAreaView>
     )
 }
 
-export default RootLayout
+export default App
 
 
