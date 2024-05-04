@@ -1,4 +1,5 @@
 import { View, Text, Image } from 'react-native'
+
 import { Stack } from 'expo-router'
 import React from 'react'
 
