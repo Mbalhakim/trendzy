@@ -6,6 +6,7 @@ import { Redirect, router } from 'expo-router';
 import { images } from '../constants';
 import CustomButton from './components/CustomButton';
 import { useGlobalContext } from '../context/GlobalProvider';
+import { signOut } from '../lib/appwrite';
 const App = () => {
     const { isLoading, isLoggedIn } = useGlobalContext();
 
@@ -53,10 +54,15 @@ const App = () => {
                         handlePress={() => router.push("/sign-in")}
                         containerStyle="w-full mt-6" />
 
+                    <CustomButton title="Sign Out"
+                        handlePress={() => signOut()}
+                        containerStyle="w-full mt-6"
+                        bgStyle='bg-red-500' />
+
                 </View>
             </ScrollView>
-            <StatusBar backgroundColor='#CB7B63'
-                style='dark'
+            <StatusBar backgroundColor='#161622'
+                style='light'
             />
         </SafeAreaView>
     )
