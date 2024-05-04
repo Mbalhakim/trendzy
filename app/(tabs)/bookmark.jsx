@@ -3,9 +3,9 @@ import React from 'react'
 
 const Bookmark = () => {
   return (
-    <View>
-      <Text>bookmark</Text>
-    </View>
+    <View className="h-full justify-center items-center text-center ">
+    <Text className="text-primary text-4xl">Bookmark</Text>
+</View>
   )
 }
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
-
+import { useGlobalContext } from '../../context/GlobalProvider';
 import { images } from "../../constants";
 import CustomButton from "../components/CustomButton";
 import FormField from "../components/FormField";
@@ -10,15 +10,33 @@ import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
 
+    const { setUser, setIsLogged } = useGlobalContext();
+
     const [isSubmitting, setSubmitting] = useState(false);
-    const submit = () => {
-        createUser();
-    }
     const [form, setForm] = useState({
         username: "",
         email: "",
         password: "",
     });
+
+    const submit = async () => {
+        if (form.username === "" || form.email === "" || form.password === "") {
+            Alert.alert("Error", "Please fill in all fields");
+        }
+
+        setSubmitting(true);
+        try {
+            const result = await createUser(form.email, form.password, form.username);
+            setUser(result);
+            setIsLogged(true);
+
+            router.replace("/home");
+        } catch (error) {
+            Alert.alert("Error", error.message);
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
 
 
@@ -54,17 +72,23 @@ const SignUp = () => {
                     <FormField
                         title="Username"
                         otherStyles="mt-5"
+                        value={form.username}
+                        handleChangeText={(e) => setForm({ ...form, username: e })}
                     />
 
                     <FormField
                         title="Email"
                         otherStyles="mt-5"
+                        value={form.email}
+                        handleChangeText={(e) => setForm({ ...form, email: e })}
                         keyboardType="email-address"
                     />
 
                     <FormField
                         title="Password"
                         otherStyles="my-5"
+                        value={form.password}
+                        handleChangeText={(e) => setForm({ ...form, password: e })}
                     />
 
                     <CustomButton
