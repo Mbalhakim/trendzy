@@ -6,10 +6,14 @@ import { View, Text, ScrollView, Dimensions, Alert, Image } from "react-native";
 import { images } from "../../constants";
 import CustomButton from "../components/CustomButton";
 import FormField from "../components/FormField";
+import { createUser } from "../../lib/appwrite";
 
 const SignUp = () => {
 
     const [isSubmitting, setSubmitting] = useState(false);
+    const submit = () => {
+        createUser();
+    }
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -66,6 +70,8 @@ const SignUp = () => {
                     <CustomButton
                         title="Sign Up"
                         containerStyles="mt-5"
+                        handlePress={submit}
+                        isLoading={isSubmitting}
                         bgStyle="bg-primary"
                         textStyles="text-stale-800 text-xl"
                     />
