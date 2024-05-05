@@ -7,10 +7,11 @@ import { images } from "../../constants";
 import CustomButton from "../components/CustomButton";
 import FormField from "../components/FormField";
 import { createUser } from "../../lib/appwrite";
+import { StatusBar } from "expo-status-bar";
 
 const SignUp = () => {
 
-    const { setUser, setIsLogged } = useGlobalContext();
+    const { setUser, setIsLoggedIn } = useGlobalContext();
 
     const [isSubmitting, setSubmitting] = useState(false);
     const [form, setForm] = useState({
@@ -28,7 +29,7 @@ const SignUp = () => {
         try {
             const result = await createUser(form.email, form.password, form.username);
             setUser(result);
-            setIsLogged(true);
+            setIsLoggedIn(true);
 
             router.replace("/home");
         } catch (error) {
@@ -41,7 +42,7 @@ const SignUp = () => {
 
 
     return (
-        <SafeAreaView className="bg-slate-900 h-full">
+        <SafeAreaView className="bg-slate-950 h-full">
             <ScrollView
                 contentContainerStyle={{
                     height: '100dvh',
@@ -114,7 +115,10 @@ const SignUp = () => {
                     </View>
                 </View>
             </ScrollView>
+            <StatusBar backgroundColor="#020617" style="light" />
+
         </SafeAreaView>
+
     );
 };
 

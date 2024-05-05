@@ -5,8 +5,9 @@ import { images } from '../../constants';
 import FormField from '../components/FormField';
 import CustomButton from '../components/CustomButton';
 import { Link, router } from 'expo-router';
-import { signIn, getCurrentUser } from "../../lib/appwrite";
+import { signIn, getCurrentUser, signOut } from "../../lib/appwrite";
 import { useGlobalContext } from '../../context/GlobalProvider';
+import { StatusBar } from 'expo-status-bar';
 
 const Signin = () => {
     const { setUser, setIsLoggedIn } = useGlobalContext();
@@ -42,7 +43,11 @@ const Signin = () => {
 
 
     return (
-        <SafeAreaView className="bg-slate-900 h-full" >
+        <SafeAreaView className="bg-slate-950 h-full" >
+            <CustomButton title="Sign Out"
+                handlePress={() => signOut()}
+                containerStyle="w-full mt-6"
+                bgStyle='bg-red-500' />
 
             <ScrollView
                 contentContainerStyle={{
@@ -107,6 +112,7 @@ const Signin = () => {
                 </View>
 
             </ScrollView>
+            <StatusBar backgroundColor="#020617" style="light" />
 
         </SafeAreaView>
     )

@@ -7,6 +7,7 @@ import { images } from '../constants';
 import CustomButton from './components/CustomButton';
 import { useGlobalContext } from '../context/GlobalProvider';
 import { signOut } from '../lib/appwrite';
+
 const App = () => {
     const { isLoading, isLoggedIn } = useGlobalContext();
 
@@ -61,9 +62,8 @@ const App = () => {
 
                 </View>
             </ScrollView>
-            <StatusBar backgroundColor='#161622'
-                style='light'
-            />
+            <StatusBar backgroundColor="#020617" style="light" />
+
         </SafeAreaView>
     )
 }

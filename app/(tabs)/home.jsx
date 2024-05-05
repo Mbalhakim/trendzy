@@ -7,7 +7,7 @@ import { images } from '../../constants/'
 import SearchInput from '../components/SearchInput'
 import Trending from '../components/Trending'
 import EmptyState from '../components/EmptyState'
-import { getAllPosts, getLatestVideos } from '../../lib/appwrite'
+import { getAllPosts, getLatestVideos, signOut } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from '../components/VideoCard'
 const Home = () => {
@@ -24,6 +24,11 @@ const Home = () => {
 
     return (
         <SafeAreaView className="bg-slate-950 h-full">
+
+            <CustomButton title="Sign Out"
+                handlePress={() => signOut()}
+                containerStyle="w-full mt-6"
+                bgStyle='bg-red-500' />
 
             <FlatList
                 data={posts}
