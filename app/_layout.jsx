@@ -2,7 +2,7 @@ import { SplashScreen, Stack } from "expo-router"
 import { useFonts } from "expo-font"
 import { useEffect } from "react";
 import GlobalProvider from "../context/GlobalProvider"
-
+import { signOut } from "../lib/appwrite";
 export default function RootLayout() {
     const [fontsLoaded, error] = useFonts({
         "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -22,15 +22,18 @@ export default function RootLayout() {
 
     }, [fontsLoaded, error])
     if (!fontsLoaded && !error) return null;
+
+
+    // signOut();
     return (
         <GlobalProvider>
             <Stack>
 
+                <Stack.Screen name="(admintabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
                 <Stack.Screen name="(auth)" options={{ headerShown: false }} />
                 <Stack.Screen name="index" options={{ headerShown: false }} />
-
-                {/* <Stack.Screen name="/search/[query]" options={{ headerShown: false }} /> */}
+                <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
 
             </Stack>
         </GlobalProvider>

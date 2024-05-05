@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-import { icons } from "../../constants";
+import icons from "../../constants/icons";
 
 const zoomIn = {
     0: {
