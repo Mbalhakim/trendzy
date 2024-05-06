@@ -1,12 +1,16 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import { getAllPosts } from '../../lib/appwrite';
+import PostsCard from '../components/PostsCard';
+import useAppwrite from '../../lib/useAppwrite';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Posts = () => {
+  const { data: posts } = useAppwrite(getAllPosts);
   return (
-    <View className="bg-slate-950 h-full justify-center items-center">
-
-      <Text className="text-white">Posts</Text>
-    </View>
+    <SafeAreaView className="flex-1 bg-slate-950">
+      <PostsCard listOfData={posts || []} />
+    </SafeAreaView>
   )
 }
 

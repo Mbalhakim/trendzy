@@ -1,71 +1,57 @@
-import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
-import { DataTable } from 'react-native-paper';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const ListTable = ({ listOfData, dataHead }) => {
-  const tableHead = dataHead;
-  const tableData = listOfData.map(user => [user.accountId, user.username, user.email, user.Role]);
+const UserCard = ({ listOfData }) => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+     
+      setUsers(listOfData);
+    };
+
+    fetchData();
+  }, [listOfData]);
+
+  if (users.length === 0) {
+    return (
+      <SafeAreaView className="flex-1 bg-slate-950">
+        <View className="px-3 py-6">
+          <Text className="font-bold	text-white text-3xl my-9">Loading...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView horizontal={true}>
-        <View>
-          <DataTable style={styles.table}>
-            <DataTable.Header style={styles.tableHeader}>
-              {tableHead.map((head, index) => (
-                <DataTable.Title key={index} style={styles.headerItem}>{head}</DataTable.Title>
-              ))}
-            </DataTable.Header>
-            {tableData.map((rowData, index) => (
-              <DataTable.Row key={index} style={[styles.tableRow, index % 2 === 0 && styles.tableRowOdd]}>
-                {rowData.map((data, index) => (
-                  <DataTable.Cell key={index} style={styles.tableData}>{data}</DataTable.Cell>
-                ))}
-              </DataTable.Row>
-            ))}
-          </DataTable>
+    <SafeAreaView className="flex-1 bg-slate-950">
+      <ScrollView>
+        <View className="px-3 py-6">
+          <Text className="font-bold	text-white text-3xl my-9">Users: {users.length}</Text>
+          {users.map((user, index) => (
+            <View key={index} className="space-y-2">
+              <View className="flex-row items-center mb-7">
+                <Image
+                  style={{ width: 60, height: 60, borderRadius: 20, marginRight: 12 }}
+                  source={{ uri: user.avatar }}
+                  alt={`${user.username} profile`}
+                />
+                <View className="border-red-500">
+                  <Text className="font-bold text-3xl text-white">{user.username}</Text>
+                  <Text className="font-bold text-sm text-white">{user.email}</Text>
+                </View>
+              </View>
+              <View className="border-t-2 border-t-teal-800 pt-8">
+                <Text className="font-bold text-sm text-white">Role: {user.role}</Text>
+                <Text className="font-bold text-sm text-white">Account ID: {user.accountId}</Text>
+              </View>
+            </View>
+          ))}
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 24,
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
-  table: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#EEEEEE',
-  },
-  tableHeader: {
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: '#000000',
-    paddingVertical: 12,
-  },
-  tableRow: {
-    flexDirection: 'row',
-    width: '100%',
-    paddingVertical: 12,
-  },
-  tableRowOdd: {
-    backgroundColor: '#EEEEEE',
-  },
-  tableData: {
-    flex: 1,
-    textAlign: 'center',
-  },
-  headerItem: {
-    flex: 1,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    color: '#FFFFFF',
-  },
-});
-
-export default ListTable;
+export default UserCard;
