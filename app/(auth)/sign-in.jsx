@@ -30,10 +30,15 @@ const Signin = () => {
             const result = await getCurrentUser();
             setUser(result);
             setIsLoggedIn(true);
-            router.replace("/home");
+            console.log(result?.Role == "admin")
+
+            if (result?.Role == "admin") {
+                router.replace("/users");
+                Alert.alert("Success", "User signed in successfully");
+            } else router.replace("/home");
 
 
-            Alert.alert("Success", "User signed in successfully");
+
         } catch (error) {
             Alert.alert("Error", error.message);
         } finally {
@@ -46,6 +51,11 @@ const Signin = () => {
         <SafeAreaView className="bg-slate-950 h-full" >
             <CustomButton title="Sign Out"
                 handlePress={() => signOut()}
+                containerStyle="w-full mt-6"
+                bgStyle='bg-red-500' />
+
+            <CustomButton title="users"
+                handlePress={() => { router.replace("/users") }}
                 containerStyle="w-full mt-6"
                 bgStyle='bg-red-500' />
 

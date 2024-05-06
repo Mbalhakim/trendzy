@@ -10,7 +10,9 @@ import EmptyState from '../components/EmptyState'
 import { getAllPosts, getLatestVideos, signOut } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from '../components/VideoCard'
+import { useGlobalContext } from '../../context/GlobalProvider'
 const Home = () => {
+    const { user, isLoggedIn } = useGlobalContext();
 
     const [refreshing, setRefreshing] = useState(false)
     const { data: posts, refetch } = useAppwrite(getAllPosts);
@@ -46,8 +48,8 @@ const Home = () => {
                     <View className="my-6 px-4 ">
                         <View className="justify-between items-start flex-row mb-6 ">
                             <View className="">
-                                <Text className="text-sm font-pmedium text-gray-100">Welcome Text</Text>
-                                <Text className="text-2xl text-white font-psemibold">Bashar Dev</Text>
+                                <Text className="text-sm font-pmedium text-gray-100">Welcome Back</Text>
+                                <Text className="text-2xl text-white font-psemibold">{!isLoggedIn ? 'Guest' : user?.username}</Text>
                             </View>
                             <View>
                                 <Image source={images.logoSmall}
