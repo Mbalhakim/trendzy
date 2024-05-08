@@ -2,15 +2,15 @@
   "expo": {
     "name": "Trendzy",
     "slug": "trendzy",
-    "scheme":"trendzy",
+    "scheme": "trendzy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/logo-modified.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/images/SplashNoColor.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#020617"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,16 +20,25 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/images/logo-modified.png",
+        "backgroundColor": "#020617",
         "package": "com.bashardev.trendzy"
-      }
+      },
+      "package": "com.bashardev.trendzy"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/images/logo-modified-small.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "16753d93-ddcf-4f86-ac32-86b62c31130e"
+      }
+    }
   }
 }

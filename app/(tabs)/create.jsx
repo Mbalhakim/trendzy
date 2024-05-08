@@ -49,7 +49,7 @@ const Create = () => {
         if (!result.canceled) {
             if (selectType === "image") {
                 const selectedImage = result.assets[0];
-                if (selectedImage.size > 1548) {
+                if (selectedImage.size > 1620132) {
                     setImageSizeCheck(true);
                     setForm({ ...form, thumbnail: null, thumbnailExternalUrl: "Enter Thumnail Url" });
                 } else {
@@ -59,7 +59,7 @@ const Create = () => {
 
             if (selectType === "video") {
                 const selectedVideo = result.assets[0];
-                if (selectedVideo.size > 1548) {
+                if (selectedVideo.size > 2020132) {
                     setVideoSizeCheck(true);
                     setForm({ ...form, video: null, videoExternalUrl: "Enter Video Url" });
                 } else {
@@ -237,7 +237,7 @@ const Create = () => {
                     title="Submit & Publish"
                     handlePress={submit}
                     containerStyles=""
-                    bgStyle="bg-red-100 my-7"
+                    bgStyle="bg-primary my-7"
                     isLoading={uploading}
                 />
             </ScrollView>

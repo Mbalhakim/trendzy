@@ -1,8 +1,7 @@
-import { SplashScreen, Stack } from "expo-router"
+import { SplashScreen, Stack, router } from "expo-router"
 import { useFonts } from "expo-font"
 import { useEffect } from "react";
 import GlobalProvider from "../context/GlobalProvider"
-import { signOut } from "../lib/appwrite";
 export default function RootLayout() {
     const [fontsLoaded, error] = useFonts({
         "Poppins-Black": require("../assets/fonts/Poppins-Black.ttf"),
@@ -25,6 +24,7 @@ export default function RootLayout() {
 
 
     // signOut();
+
     return (
         <GlobalProvider>
             <Stack>

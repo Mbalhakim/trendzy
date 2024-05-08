@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
 const CustomButton = ({
@@ -8,7 +8,7 @@ const CustomButton = ({
         <TouchableOpacity
             onPress={handlePress}
             activeOpacity={0.7}
-            className={` ${bgStyle} rounded-xl  ${containerStyle} justify-center ${isLoading ? 'opacity-50' : ''}`}
+            className={` ${bgStyle} rounded-xl min-h-[62px]  ${containerStyle} justify-center ${isLoading ? 'opacity-50' : ''}`}
             disabled={isLoading}>
 
             <Text className={`text-center text-slate-950 text-lg font-psemibold ${textStyles}`}> {title} </Text>

@@ -1,13 +1,12 @@
 import { View, Text, FlatList, Image, RefreshControl, Alert } from 'react-native'
-import { React, useEffect, useState } from 'react'
+import { React, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { router } from 'expo-router'
 import CustomButton from '../components/CustomButton'
 import { images } from '../../constants/'
 import SearchInput from '../components/SearchInput'
 import Trending from '../components/Trending'
 import EmptyState from '../components/EmptyState'
-import { getAllPosts, getLatestVideos, signOut } from '../../lib/appwrite'
+import { getAllPosts, getLatestVideos } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from '../components/VideoCard'
 import { useGlobalContext } from '../../context/GlobalProvider'
@@ -27,10 +26,6 @@ const Home = () => {
     return (
         <SafeAreaView className="bg-slate-950 h-full">
 
-            <CustomButton title="Sign Out"
-                handlePress={() => signOut()}
-                containerStyle="w-full mt-6"
-                bgStyle='bg-red-500' />
 
             <FlatList
                 data={posts}
@@ -40,8 +35,8 @@ const Home = () => {
                         title={item.title}
                         thumbnail={item.thumbnail}
                         video={item.video}
-                        creator={item.creator.username}
-                        avatar={item.creator.avatar}
+                        creator={item.creator === null ? 'Deleted User' : item.creator.username}
+                        avatar={item.creator === null ? 'Deleted User' : item.creator.avatar}
                     />
                 )}
                 ListHeaderComponent={() => (
@@ -52,8 +47,8 @@ const Home = () => {
                                 <Text className="text-2xl text-white font-psemibold">{!isLoggedIn ? 'Guest' : user?.username}</Text>
                             </View>
                             <View>
-                                <Image source={images.logoSmall}
-                                    className="w-10 h-10"
+                                <Image source={images.logo}
+                                    className="w-20 h-20"
                                     resizeMode='contain' />
                             </View>
                         </View>
