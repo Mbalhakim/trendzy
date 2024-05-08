@@ -5,7 +5,7 @@ import { images } from '../../constants';
 import FormField from '../components/FormField';
 import CustomButton from '../components/CustomButton';
 import { Link, router } from 'expo-router';
-import { signIn, getCurrentUser, signOut } from "../../lib/appwrite";
+import { signIn, getCurrentUser } from "../../lib/appwrite";
 import { useGlobalContext } from '../../context/GlobalProvider';
 import { StatusBar } from 'expo-status-bar';
 
@@ -30,7 +30,6 @@ const Signin = () => {
             const result = await getCurrentUser();
             setUser(result);
             setIsLoggedIn(true);
-            console.log(result?.Role == "admin")
 
             if (result?.Role == "admin") {
                 router.replace("/users");
@@ -49,23 +48,15 @@ const Signin = () => {
 
     return (
         <SafeAreaView className="bg-slate-950 h-full" >
-            <CustomButton title="Sign Out"
-                handlePress={() => signOut()}
-                containerStyle="w-full mt-6"
-                bgStyle='bg-red-500' />
 
-            <CustomButton title="users"
-                handlePress={() => { router.replace("/users") }}
-                containerStyle="w-full mt-6"
-                bgStyle='bg-red-500' />
 
             <ScrollView
                 contentContainerStyle={{
                     height: '100dvh',
                 }}
             >
-                <View className="w-full justify-center h-full px-4 my-2">
-                    <View className="flex  flex-row items-center mt-2 justify-center">
+                <View className="w-full justify-center h-full  px-4 my-2">
+                    <View className="flex mt-20  flex-row items-center  justify-center">
                         <Image
                             source={images.logo}
                             style={{ height: 100, width: 100 }}

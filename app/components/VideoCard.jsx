@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 
 import { icons } from "../../constants";
 
-const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
+const VideoCard = ({ title, creator, avatar, thumbnail, video, onpressAction }) => {
     const [play, setPlay] = useState(false);
 
     return (
@@ -36,7 +36,9 @@ const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
                 </View>
 
                 <View className="pt-2">
-                    <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+                    <TouchableOpacity onPress={onpressAction}>
+                        <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
+                    </TouchableOpacity>
                 </View>
             </View>
 

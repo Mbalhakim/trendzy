@@ -9,9 +9,14 @@ import { useGlobalContext } from '../context/GlobalProvider';
 import { signOut } from '../lib/appwrite';
 
 const App = () => {
-    const { isLoading, isLoggedIn } = useGlobalContext();
+    const { isLoading, isLoggedIn, user } = useGlobalContext();
 
-    if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
+
+    if (!isLoading && isLoggedIn && !user.Role === "admin") {
+        return <Redirect href="/home" />;
+    } else if (!isLoading && isLoggedIn && user.Role === "admin") {
+        return <Redirect href="/users" />;
+    }
     return (
         <SafeAreaView className="bg-slate-950 h-full">
 
